@@ -1,0 +1,3 @@
+auto ${WAN}
+iface ${WAN} inet ${WANMODE}
+

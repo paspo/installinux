@@ -1,0 +1,2 @@
+*/5 *	* * *	root	if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg/installinux.cfg ] ; then env LANG=C /usr/bin/mrtg /etc/mrtg/installinux.cfg 2>&1 ; fi
+

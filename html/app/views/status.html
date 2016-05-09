@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Installinux</title>
+
+    <!-- Bootstrap -->
+    <link href="{{ @BASE }}/vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ @BASE }}/assets/css/style.css" rel="stylesheet">
+
+<style>
+    #accesslog {
+        overflow: scroll;
+        height: 200px;
+    }
+    .hit { color: green; }
+    .miss { color: red; }
+    .redir { color: rgb(180, 180, 0); }
+
+    .processRunning { color: green; }
+    .processStopped { color: red; }
+</style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+
+<include href="navbar.html" />
+
+<div class="container">
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>System status</h1>
+
+        <p>Hostname: <b>{{ @hostname }}</b></p>
+        <p>Uptime: <b><span id="uptime">{{ @uptime }}</span></b></p>
+        <p>Status:
+            <span id="proc_apache2">apache2</span>
+            <span id="proc_dnsmasq">dnsmasq</span>
+            <span id="proc_pure_ftpd">pure-ftpd</span>
+            <span id="proc_rpc_mountd">rpc.mountd</span>
+            <span id="proc_rpc_statd">rpc.statd</span>
+            <span id="proc_rpcbind">rpcbind</span>
+            <span id="proc_squid3">squid3</span>
+            <span id="proc_sshd">sshd</span>
+        </p>
+        <p>
+          <div id="accesslog" class="form-control font-size=6px">Loading...</div>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{{ @BASE }}/vendor/components/jquery/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ @BASE }}/vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var interval1 = null;
+        var interval2 = null;
+        var textareaLines = 500;
+        var justStarted = true;
+
+        $(function(){
+            interval1 = setInterval(function(){updateLog();}, 1000);
+            interval2 = setInterval(function(){updateUptime();updateProcesses();}, 5000);
+        });
+
+        function updateLog(){
+            $.get('/ajax/log', function(data) {
+                if (justStarted) {
+                    $('#accesslog').html('');
+                    justStarted = false;
+                }
+                $('#accesslog').append(data);
+                lines = $('#accesslog').val().split("\n");
+                if (lines.length > textareaLines) {
+                    acceptedData=lines.slice(lines.length-textareaLines-1).join("\n");
+                    $('#accesslog').html(acceptedData);
+                }
+                // TODO: add disable autoscrolling
+                $("#accesslog").scrollTop($("#accesslog")[0].scrollHeight - $("#accesslog").height());
+            });
+        }
+
+        function updateProcesses(){
+            $.get('/ajax/procs', function(data) {
+                var obj = $.parseJSON(data);
+                var tags = [ "proc_apache2", "proc_dnsmasq", "proc_pure_ftpd", "proc_rpc_mountd", "proc_rpc_statd", "proc_rpcbind", "proc_squid3","proc_sshd" ];
+
+                tags.forEach(function(entry) {
+                    var id = '#' + entry;
+                    if (obj[entry]) {
+                        $(id).removeClass('processStopped').addClass('processRunning');
+                    } else {
+                        $(id).removeClass('processRunning').addClass('processStopped');
+                    }
+                });
+
+
+            });
+        }
+
+        function updateUptime(){
+            $.get('/ajax/uptime', function(data) {
+                var obj = $.parseJSON(data);
+                var tags = [ "uptime" ];
+
+                tags.forEach(function(entry) {
+                    var id = '#' + entry;
+                    $(id).html(obj[entry]);
+                });
+
+            });
+        }
+    </script>
+  </body>
+</html>

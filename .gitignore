@@ -1,0 +1,5 @@
+html/logs
+html/tmp
+html/vendor
+html/composer.lock
+/html/nbproject/private/

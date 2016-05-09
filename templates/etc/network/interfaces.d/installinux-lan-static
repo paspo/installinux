@@ -1,0 +1,4 @@
+auto ${LAN}
+iface ${LAN} inet ${LANMODE}
+	address ${LANADDRESS}
+	netmask ${LANSUBNETMASK}

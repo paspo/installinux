@@ -1,0 +1,8 @@
+include debian/debian.menu
+include ubuntu/ubuntu.menu
+include pmagic/pmagic.menu
+include thinstation/thinstation.menu
+include freedos/freedos.menu
+include ghostdos/ghostdos.menu
+include vmware/vmware.menu
+include memtest/memtest.menu

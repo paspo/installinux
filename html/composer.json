@@ -1,0 +1,9 @@
+{
+    "require": {
+        "twbs/bootstrap": "^3.3",
+        "bcosca/fatfree": "^3.5",
+        "components/jquery": "^2.1",
+        "nostalgiaz/bootstrap-switch": "^3.3",
+		"php": ">=5.4"
+    }
+}

@@ -1,0 +1,5 @@
+html/ /usr/share/installinux/html
+templates/* /usr/share/installinux/templates
+bin/* /usr/bin
+tftproot/* /srv/tftp
+conf/* /etc

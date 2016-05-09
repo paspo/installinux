@@ -1,0 +1,6 @@
+etc/installinux
+usr/share/installinux/html/tmp
+usr/share/installinux/html/logs
+srv/tftp
+srv/iso
+srv/nfs

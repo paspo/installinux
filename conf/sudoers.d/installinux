@@ -1,0 +1,2 @@
+www-data ALL=(root) NOPASSWD: /sbin/reboot, /sbin/poweroff
+www-data ALL=(root) NOPASSWD: /usr/share/installinux/html/scripts/

@@ -1,0 +1,2 @@
+installinux:880/isopreload/debian/	httpredir.debian.org/debian/
+http://installinux:880/isopreload/ubuntu/	http://archive.ubuntu.com/ubuntu/

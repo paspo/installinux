@@ -1,0 +1,47 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+
+      if [ -z "`id -u ftp 2>/dev/null`" ];  then
+        adduser --system --home /srv/iso --gecos "installinux" \
+          --no-create-home --disabled-password \
+          --quiet ftp || true
+      fi
+
+      if [ ! -d /srv/iso ] ; then
+        mkdir -p /srv/iso || true
+      fi
+
+      chown ftp:ftp /srv/iso
+      chmod 775 /srv/iso
+
+      if [ ! -e /etc/pure-ftpd/pureftpd.passwd ] ; then
+          ( echo admin ; echo admin ) | /usr/bin/pure-pw useradd admin -u ftp -d /srv/iso/ -m
+      fi
+      
+      /usr/sbin/service pure-ftpd restart &>/dev/null
+      
+      # apache2 configuration
+      a2ensite installinux-webinterface &>/dev/null
+      a2enconf installinux.conf &>/dev/null
+      a2dismod status &>/dev/null
+      a2enmod rewrite &>/dev/null
+      a2enmod php5 &>/dev/null
+      service apache2 reload &>/dev/null
+
+
+	;;
+
+    abort-upgrade|abort-deconfigure|abort-remove)
+	;;
+
+    *)
+	echo "$0 called with unknown argument \`$1'" 1>&2
+	exit 1
+	;;
+esac
+
+#DEBHELPER#
+exit 0

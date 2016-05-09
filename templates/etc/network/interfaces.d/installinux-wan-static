@@ -1,0 +1,5 @@
+auto ${WAN}
+iface ${WAN} inet ${WANMODE}
+	address ${WANADDRESS}
+	netmask ${WANSUBNETMASK}
+	gateway ${WANGATEWAY}
