@@ -1,0 +1,2 @@
+^https?:\/\/installinux:880\/isopreload\/debian\/(.*)	http://httpredir.debian.org/debian/$1
+^https?:\/\/installinux:880\/isopreload\/ubuntu\/(.*)	http://archive.ubuntu.com/ubuntu/$1
