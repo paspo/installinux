@@ -15,7 +15,7 @@ while (my $file = readdir(DIR)) {
     while (my $line = <$data>) {
         chomp $line;
         $line =~ s/\R//g;
-        next if ($line =~ m/^$/);
+        next if ($line =~ m/^\s*#?$/);
         my($mirror_url, $redir_url) = split("\t", $line);
         $urls{$mirror_url} = $redir_url;
     }
