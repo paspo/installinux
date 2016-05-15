@@ -11,7 +11,7 @@ my $dir = '/etc/squid3/storeid';
 opendir (DIR, $dir) or die $!;
 while (my $file = readdir(DIR)) {
     next if ($file =~ m/^\./);
-    open (my $data, '<', $dir . '/' . $file) || die "Error: $!\n";
+    open (my $data, '<', $dir . '/' . $file) or die "Error: $!\n";
     while (<$data>) {
         chomp;
 		if (/^\s*([^\t]+?)\s*\t+\s*([^\t]+?)\s*$/) {
@@ -25,23 +25,24 @@ closedir(DIR);
 
 print STDERR "$0: loaded " . scalar @rules . " rules\n";
 
+$| = 1;
 URL: while (<STDIN>) {
     chomp;
     my @X = split(" ");
     my $a = $X[0];
-	$_ = $X[1];
-    my $new_URL = $X[1];
+	my $url = $X[1];
 
     foreach my $rule (@rules) {
-        if (my @match = /$rule->[0]/) {
-            $_ = $rule->[1];
+        if (my @match = $url =~ /$rule->[0]/) {
+            print STDERR "$0 [$a]: rewriting for: $url \n";
+            my $new_url = $rule->[1];
 			for (my $i=1; $i<=scalar(@match); $i++) {
-            	s/\$$i/$match[$i-1]/g;
+            	$new_url =~ s/\$$i/$match[$i-1]/g;
             }
-            print "$a OK store-id=$_\n";
+            print "$a OK store-id=$new_url\n";
             next URL;
     	}
     }
 
-    print "$a OK store-id=$new_URL\n";
+    print "$a OK store-id=$url\n";
 }
