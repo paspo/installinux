@@ -5,7 +5,7 @@
 
 apt-get install iptables iptables-persistent pure-ftpd nfs-kernel-server \
 	squid3 apache2 apache2-mpm-prefork libapache2-mod-php5 coreutils \
-	dnsmasq perl wget bash snmpd mrtg cron sudo
+	dnsmasq perl wget bash snmpd mrtg cron sudo ifupdown bridge-utils
 
 # make sure squid3 is >= 3.4
 

@@ -8,7 +8,7 @@ Homepage: https://github.com/paspo/installinux
 
 Package: installinux
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, iptables, iptables-persistent, pure-ftpd, nfs-kernel-server, squid3 (>= 3.4.0), apache2, apache2-mpm-prefork, libapache2-mod-php5, coreutils, dnsmasq, perl, wget, bash, snmpd, mrtg, cron, sudo
+Depends: ${shlibs:Depends}, ${misc:Depends}, iptables, iptables-persistent, pure-ftpd, nfs-kernel-server, squid3 (>= 3.4.0), apache2, apache2-mpm-prefork, libapache2-mod-php5, coreutils, dnsmasq, perl, wget, bash, snmpd, mrtg, cron, sudo, ifupdown, bridge-utils
 Description: Installinux system
  This package reconfigure your system (preferibly a fresh installed one) to have a transparent proxy server tuned for caching linux installations, a dhcp and tftp server for the internal network, an ftp server for ISO distributions and a nfs server for special network boots. 
 

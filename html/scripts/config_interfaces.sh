@@ -4,6 +4,11 @@
 
 echo -n Configuring INTERFACES...
 
+# TODO:
+# looks like the best way is to have an internal bridge to which we can assign internal interfaces (ethernet and wifi+hostapd)
+# maybe we should have an external bridge?
+
+
 if [[ ${DEBIAN_VERSION} -ge 8 ]] ; then
 	mkdir -p /etc/network/interfaces.d
 	render_template ${TEMPLATESDIR}/etc/network/interfaces.d/installinux-wan-${WANMODE} > /etc/network/interfaces.d/installinux-wan
