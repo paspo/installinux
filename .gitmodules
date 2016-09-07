@@ -1,0 +1,12 @@
+[submodule "html/vendor/components/bootstrap"]
+	path = html/vendor/components/bootstrap
+	url = https://github.com/components/bootstrap
+[submodule "html/vendor/components/jquery"]
+	path = html/vendor/components/jquery
+	url = https://github.com/components/jquery
+[submodule "html/vendor/nostalgiaz/bootstrap-switch"]
+	path = html/vendor/nostalgiaz/bootstrap-switch
+	url = https://github.com/nostalgiaz/bootstrap-switch
+[submodule "html/vendor/bcosca/fatfree"]
+	path = html/vendor/bcosca/fatfree
+	url = https://github.com/bcosca/fatfree
