@@ -1,5 +1,6 @@
 ^https?:\/\/httpredir\.debian\.org\/debian\/(.*)	http://debian.internal/debian/$1
 ^https?:\/\/cdn\.debian\.net\/debian\/(.*)	http://debian.internal/debian/$1
+^https?:\/\/ftp\.debian\.org\/debian\/(.*)	http://debian.internal/debian/$1
 ^https?:\/\/ftp\.au\.debian\.org\/debian\/(.*)	http://debian.internal/debian/$1
 ^https?:\/\/ftp\.at\.debian\.org\/debian\/(.*)	http://debian.internal/debian/$1
 ^https?:\/\/ftp\.be\.debian\.org\/debian\/(.*)	http://debian.internal/debian/$1
